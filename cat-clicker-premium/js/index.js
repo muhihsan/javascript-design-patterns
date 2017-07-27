@@ -72,50 +72,32 @@
         var elemCatList = document.getElementById('cat-list');
         elemCatList.appendChild(elemCat);
       });
-    },
-
-    render: function() {
     }
   };
 
   var catView = {
     init: function() {
-      var cat = octopus.getSelectedCat();
+      this.update();
 
-      var elemName = document.createElement('h2');
-      elemName.className = 'text-center';
-      elemName.id = 'cat-name';
-      elemName.innerText = cat.name;
-
-      var elemImage = document.createElement('img');
-      elemImage.className = 'img-responsive cursor-pointer';
-      elemImage.id = 'cat-image';
-      elemImage.setAttribute('src', 'http://placekitten.com/1500/400');
-      elemImage.setAttribute('alt', "Cat " + cat.name);
-      elemImage.setAttribute('title', 'Click me to add the click count');
+      var elemImage = document.getElementById('cat-image');
       elemImage.addEventListener('click', function(e) {
         octopus.addNumOfClick();
         catView.render();
       }, false);
-
-      var elemNumOfClick = document.createElement('h3');
-      elemNumOfClick.className = 'text-center';
-      elemNumOfClick.id = 'num-of-click';
-
-      var container = document.getElementById('cat-show');
-      container.innerHTML = '';
-      container.appendChild(elemName);
-      container.appendChild(elemImage);
-      container.appendChild(elemNumOfClick);
-
-      this.showNumOfClick(cat);
     },
 
     render: function() {
+      this.update();
+    },
+
+    update: function() {
       var cat = octopus.getSelectedCat();
 
       var elemName = document.getElementById('cat-name');
       elemName.innerText = cat.name;
+
+      var elemImage = document.getElementById('cat-image');
+      elemImage.setAttribute('alt', "Cat " + cat.name);
 
       this.showNumOfClick(cat);
     },
