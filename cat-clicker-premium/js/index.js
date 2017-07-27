@@ -92,7 +92,8 @@
       elemImage.setAttribute('alt', "Cat " + cat.name);
       elemImage.setAttribute('title', 'Click me to add the click count');
       var elemNumOfClick = document.createElement('h3');
-      elemNumOfClick.className = 'text-center num-of-click';
+      elemNumOfClick.className = 'text-center';
+      elemNumOfClick.id = 'num-of-click';
 
       var container = document.getElementById('cat-show');
       container.innerHTML = '';
@@ -100,6 +101,7 @@
       container.appendChild(elemImage);
       container.appendChild(elemNumOfClick);
 
+      this.showNumOfClick(cat);
       // self.showNumOfClick();
 
       // var eCatImage = container.getElementsByClassName('cat-image')[0];
@@ -114,6 +116,13 @@
 
       var elemName = document.getElementById('cat-name');
       elemName.innerText = cat.name;
+
+      this.showNumOfClick(cat);
+    },
+
+    showNumOfClick: function(cat) {
+      var eNumOfClick = document.getElementById('num-of-click');
+      eNumOfClick.innerHTML = cat.numOfClick + ' time' + (cat.numOfClick === 1? '' : 's') + ' clicked.';
     }
   };
 
