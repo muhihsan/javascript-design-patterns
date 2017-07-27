@@ -7,7 +7,7 @@
     },
     showNumOfClick: function(elem) {
       if (elem !== null) {
-        elem.innerHTML = this.numOfClicked + " time" + (this.numOfClicked === 1? "" : "s");
+        elem.innerHTML = this.numOfClicked + " time" + (this.numOfClicked === 1? "" : "s") + " clicked.";
       }
     }
   }
