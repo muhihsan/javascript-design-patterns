@@ -1,21 +1,22 @@
 (function(){
 
-  var Cat = function(catName) {
+  var Cat = function(catName, url) {
     var self = this;
     self.name = catName;
+    self.url = url;
     self.numOfClick = 0;
   };
 
   var model = {
-    catNames: ['Daenerys Targaryen', 'John Snow', 'Robert Baratheon',
-              'Tyrion Lannister', 'Ned Stark'],
     cats: [],
     selectedCat: null,
 
     init: function() {
-      this.catNames.forEach(function(catName) {
-        this.cats.push(new Cat(catName));
-      }, this);
+      this.cats.push(new Cat('Daenerys Targryen', 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg'));
+      this.cats.push(new Cat('John Snow', 'https://static.pexels.com/photos/33537/cat-animal-cat-portrait-mackerel.jpg'));
+      this.cats.push(new Cat('Robert Baratheon', 'https://static.pexels.com/photos/511041/pexels-photo-511041.jpeg'));
+      this.cats.push(new Cat('Tyrion Lannister', 'https://static.pexels.com/photos/156934/pexels-photo-156934.jpeg'));
+      this.cats.push(new Cat('Ned Stark', 'https://static.pexels.com/photos/86243/pexels-photo-86243.jpeg'));
       this.selectedCat = this.cats[0];
     }
   };
@@ -87,11 +88,7 @@
 
       this.elemName.innerText = cat.name;
       this.elemImage.setAttribute('alt', "Cat " + cat.name);
-
-      this.showNumOfClick(cat);
-    },
-
-    showNumOfClick: function(cat) {
+      this.elemImage.setAttribute('src', cat.url);
       this.elemNumOfClick.innerHTML = cat.numOfClick + ' time' + (cat.numOfClick === 1? '' : 's') + ' clicked.';
     }
   };
