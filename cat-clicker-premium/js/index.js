@@ -35,15 +35,12 @@
       return model.selectedCat;
     },
 
-    selectCat: function(catName) {
-      model.selectedCat = model.cats.find(function(cat) {
-        return catName === cat.name;
-      });
+    selectCat: function(cat) {
+      model.selectedCat = cat;
     },
 
     addNumOfClick: function() {
-      var cat = this.getSelectedCat();
-      cat.numOfClick++;
+      model.selectedCat.numOfClick++;
     }
   };
 
@@ -57,12 +54,12 @@
         elemCatLink.setAttribute('atr', '#');
         elemCatLink.innerText = cat.name;
 
-        function catClicked(catName) {
-          octopus.selectCat(catName);
-          catView.render();
-        }
-
-        elemCatLink.addEventListener('click', catClicked.bind(null, cat.name), false);
+        elemCatLink.addEventListener('click', (function catClicked(cat) {
+          return function() {
+            octopus.selectCat(cat);
+            catView.render();
+          };
+        })(cat), false);
 
         elemCat.appendChild(elemCatLink);
         var elemCatList = document.getElementById('cat-list');
@@ -73,34 +70,29 @@
 
   var catView = {
     init: function() {
-      this.update();
+      this.elemName = document.getElementById('cat-name');
+      this.elemImage = document.getElementById('cat-image');
+      this.elemNumOfClick = document.getElementById('num-of-click');
 
-      var elemImage = document.getElementById('cat-image');
-      elemImage.addEventListener('click', function(e) {
+      this.elemImage.addEventListener('click', function(e) {
         octopus.addNumOfClick();
         catView.render();
       }, false);
+
+      this.render();
     },
 
     render: function() {
-      this.update();
-    },
-
-    update: function() {
       var cat = octopus.getSelectedCat();
 
-      var elemName = document.getElementById('cat-name');
-      elemName.innerText = cat.name;
-
-      var elemImage = document.getElementById('cat-image');
-      elemImage.setAttribute('alt', "Cat " + cat.name);
+      this.elemName.innerText = cat.name;
+      this.elemImage.setAttribute('alt', "Cat " + cat.name);
 
       this.showNumOfClick(cat);
     },
 
     showNumOfClick: function(cat) {
-      var eNumOfClick = document.getElementById('num-of-click');
-      eNumOfClick.innerHTML = cat.numOfClick + ' time' + (cat.numOfClick === 1? '' : 's') + ' clicked.';
+      this.elemNumOfClick.innerHTML = cat.numOfClick + ' time' + (cat.numOfClick === 1? '' : 's') + ' clicked.';
     }
   };
 
