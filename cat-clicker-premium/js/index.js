@@ -10,13 +10,13 @@
     catNames: ['Daenerys Targaryen', 'John Snow', 'Robert Baratheon',
               'Tyrion Lannister', 'Ned Stark'],
     cats: [],
-    selectedCat: '',
+    selectedCat: null,
 
     init: function() {
       this.catNames.forEach(function(catName) {
         this.cats.push(new Cat(catName));
       }, this);
-      this.selectedCat = this.catNames[0];
+      this.selectedCat = this.cats[0];
     }
   };
 
@@ -31,18 +31,14 @@
       return model.cats;
     },
 
-    getCat: function(catName) {
-      return model.cats.find(function(cat) {
-        return catName === cat.name;
-      });
-    },
-
     getSelectedCat: function() {
-      return this.getCat(model.selectedCat);
+      return model.selectedCat;
     },
 
     selectCat: function(catName) {
-      model.selectedCat = catName;
+      model.selectedCat = model.cats.find(function(cat) {
+        return catName === cat.name;
+      });
     },
 
     addNumOfClick: function() {
