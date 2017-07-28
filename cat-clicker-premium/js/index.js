@@ -152,7 +152,7 @@
     hide: function() {
       var self = this;
       self.elemAdminActionForm.className = 'hidden';
-      self.elemAdminAccessButton.className = self.elemAdminAccessButton.className.replace(' disabled', '');
+      self.elemAdminAccessButton.className = 'btn btn-default';
     },
 
     save: function() {
