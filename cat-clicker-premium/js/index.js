@@ -74,6 +74,7 @@
           return function() {
             octopus.selectCat(cat);
             catView.render();
+            adminView.render();
           };
         })(cat), false);
 
