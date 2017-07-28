@@ -112,6 +112,10 @@
         self.show();
       }, false);
 
+      self.elemCancelEditButton.addEventListener('click', function() {
+        self.hide();
+      }, false);
+
       this.render();
     },
 
@@ -127,6 +131,12 @@
       var self = this;
       self.elemAdminActionForm.className = '';
       self.elemAdminAccessButton.className = self.elemAdminAccessButton.className + ' disabled';
+    },
+
+    hide: function() {
+      var self = this;
+      self.elemAdminActionForm.className = 'hidden';
+      self.elemAdminAccessButton.className = self.elemAdminAccessButton.className.replace(' disabled', '');
     }
   }
 
