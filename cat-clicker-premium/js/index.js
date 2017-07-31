@@ -94,6 +94,7 @@
       self.elemImage.addEventListener('click', function(e) {
         octopus.addNumOfClick();
         catView.render();
+        adminView.render();
       }, false);
 
       self.render();
